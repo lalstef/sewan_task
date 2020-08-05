@@ -5,6 +5,16 @@
 git clone git@github.com:lalstef/sewan_task.git
 ```
 
+## Environment variables
+The following environment variables needs to be set:
+
+```
+SMTP_HOST
+SMTP_PORT
+SMTP_USERNAME
+SMTP_PASSWORD
+```
+
 # Run
 
 The script builds a docker image and starts a docker container with port 8003 exposed.
