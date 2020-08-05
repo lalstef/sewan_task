@@ -1,0 +1,23 @@
+# pull official base image
+FROM python:3.8.1-slim-buster
+
+# set work directory
+WORKDIR .
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install dependencies
+RUN pip install --upgrade pip
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+COPY deployment/start_server.sh start_server.sh
+
+EXPOSE 8003:8003
+
+# copy project
+COPY app /app/
+
+ENTRYPOINT ["./start_server.sh"]
