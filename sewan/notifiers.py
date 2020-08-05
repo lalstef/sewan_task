@@ -4,7 +4,7 @@ import smtplib
 from socket import gaierror
 from email.message import EmailMessage
 
-from app import config
+from sewan import config
 
 class Notifier(object):
     def notify():
@@ -12,6 +12,9 @@ class Notifier(object):
 
 
 class EmailNotifier(Notifier):
+    def __str__(self):
+        return self.__class__.__name__
+
     def __init__(self, target_email):
         self.target_email = target_email
 
@@ -28,6 +31,7 @@ class EmailNotifier(Notifier):
                 server.login(config.SMTP_USERNAME, config.SMTP_PASSWORD)
                 server.send_message(msg)
                 server.quit()
+                return msg
         except (gaierror, ConnectionRefusedError):
             print('Failed to connect to the server. Bad connection settings?')
         except smtplib.SMTPServerDisconnected:
@@ -37,15 +41,19 @@ class EmailNotifier(Notifier):
 
 
 class HTTPNotifier(Notifier):
+    def __str__(self):
+        return self.__class__.__name__
+
     def __init__(self, target_url):
         self.target_url = target_url
 
     def notify(self, notification):
-        requests.post(
+        response = requests.post(
             self.target_url, 
             data=json.dumps({'notification': notification}), 
             headers={'Content-Type': 'application/json'}
         )
+        return response
 
 
 registered_notifiers = []
