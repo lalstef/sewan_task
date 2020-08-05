@@ -33,7 +33,7 @@ class EmailNotifier(Notifier):
         except smtplib.SMTPServerDisconnected:
             print('Failed to connect to the server. Wrong user/password?')
         except smtplib.SMTPException as e:
-            print('SMTP error occurred: ' + str(e))
+            print('SMTP error occurred: {}'.format(e))
 
 
 class HTTPNotifier(Notifier):
