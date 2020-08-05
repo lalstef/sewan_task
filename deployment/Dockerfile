@@ -1,6 +1,9 @@
 # pull official base image
 FROM python:3.8.1-slim-buster
 
+ARG email_backend
+ARG http_backend
+
 # set work directory
 WORKDIR .
 
@@ -19,5 +22,8 @@ EXPOSE 8003:8003
 
 # copy project
 COPY app /app/
+
+ENV EMAIL_BACKEND=${email_backend}
+ENV HTTP_BACKEND=${http_backend}
 
 ENTRYPOINT ["./start_server.sh"]

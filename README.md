@@ -11,7 +11,7 @@ The script builds a docker image and starts a docker container with port 8003 ex
 
 ```
 cd sewan
-./build_and_run.sh
+./build_and_run.sh admin@example.com http://api.example.com/test/
 ```
 
 
