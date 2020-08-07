@@ -42,3 +42,7 @@ tools/send_notification.sh <notification>
 ```
 
 # Running Tests
+
+```
+tools/run_tests.sh
+```
